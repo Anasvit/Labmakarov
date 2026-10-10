@@ -1,0 +1,66 @@
+﻿<Window x:Class="Lab3_Guselnikova.ProductEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Товар" Height="560" Width="480"
+        WindowStartupLocation="CenterOwner"
+        Background="White">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="IdLabel" Grid.Row="0" Grid.Column="0" Text="ID товара:" Margin="0,4"/>
+        <TextBox   Grid.Row="0" Grid.Column="1" x:Name="IdBox" IsReadOnly="True"
+                   Background="#EEE" Margin="0,4"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Наименование товара:" Margin="0,4"/>
+        <TextBox   Grid.Row="1" Grid.Column="1" x:Name="NameBox" Margin="0,4"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Категория товара:" Margin="0,4"/>
+        <ComboBox  Grid.Row="2" Grid.Column="1" x:Name="CategoryBox"
+                   DisplayMemberPath="Name" Margin="0,4"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Описание товара:" Margin="0,4"/>
+        <TextBox   Grid.Row="3" Grid.Column="1" x:Name="DescriptionBox"
+                   AcceptsReturn="True" Height="60" TextWrapping="Wrap"
+                   VerticalScrollBarVisibility="Auto" Margin="0,4"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Производитель:" Margin="0,4"/>
+        <ComboBox  Grid.Row="4" Grid.Column="1" x:Name="ManufacturerBox"
+                   DisplayMemberPath="Name" Margin="0,4"/>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Поставщик:" Margin="0,4"/>
+        <ComboBox  Grid.Row="5" Grid.Column="1" x:Name="SupplierBox"
+                   DisplayMemberPath="Name" Margin="0,4"/>
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Цена:" Margin="0,4"/>
+        <TextBox   Grid.Row="6" Grid.Column="1" x:Name="PriceBox" Margin="0,4"/>
+
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Количество на складе:" Margin="0,4"/>
+        <TextBox   Grid.Row="7" Grid.Column="1" x:Name="CountBox" Margin="0,4"/>
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Действующая скидка (%):" Margin="0,4"/>
+        <TextBox   Grid.Row="8" Grid.Column="1" x:Name="DiscountBox" Margin="0,4"/>
+
+        <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2"
+                    Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Сохранить" Width="110" Height="30" Margin="0,0,10,0"
+                    Click="Save_Click"/>
+            <Button Content="Отмена" Width="90" Height="30" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

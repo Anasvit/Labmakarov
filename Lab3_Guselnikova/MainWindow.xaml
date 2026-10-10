@@ -20,9 +20,12 @@
         <Grid Grid.Row="0" Margin="0,0,0,10">
             <TextBlock Text="Гусельникова Анастасия Витальевна"
                        HorizontalAlignment="Right" VerticalAlignment="Center"
-                       Margin="0,0,90,0" FontWeight="Bold"/>
-            <Button Content="Выход" HorizontalAlignment="Right" Width="80" Height="26"
-                    Click="Exit_Click"/>
+                       Margin="0,0,250,0" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Добавить товар" Width="130" Height="26" Margin="0,0,8,0"
+                Click="AddProduct_Click"/>
+                <Button Content="Выход" Width="80" Height="26" Click="Exit_Click"/>
+            </StackPanel>
         </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
@@ -38,7 +41,9 @@
                     <DataTemplate>
                         <Border BorderBrush="Black" BorderThickness="1"
                                 Margin="0,0,0,6"
-                                Background="{Binding Discount, Converter={StaticResource DiscountBg}}">
+                                Background="{Binding Discount, Converter={StaticResource DiscountBg}}"
+                                Tag="{Binding}"
+                                MouseLeftButtonUp="Card_Click">
                             <Grid Height="130">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="150"/>
@@ -75,6 +80,8 @@
                                         <TextBlock Text="{Binding Discount, StringFormat='{}{0} %'}"
                                                    TextAlignment="Center" FontWeight="Bold" FontSize="18"
                                                    Margin="0,4,0,0"/>
+                                        <Button Content="Удалить" Width="90" Margin="0,8,0,0"
+                                                Click="Delete_Click" Tag="{Binding}"/>
                                     </StackPanel>
                                 </Border>
                             </Grid>

@@ -66,6 +66,61 @@ namespace Lab3_Guselnikova
             _source.View.Refresh();
         }
 
+        private void AddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new ProductEditWindow(null) { Owner = this };
+            if (win.ShowDialog() == true)
+                ReloadProducts();
+        }
+
+        private void Card_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource is System.Windows.Controls.Button)
+                return;
+
+            var parent = e.OriginalSource as System.Windows.DependencyObject;
+            while (parent != null)
+            {
+                if (parent is System.Windows.Controls.Button)
+                    return;
+                parent = System.Windows.Media.VisualTreeHelper.GetParent(parent);
+            }
+
+            if (sender is not System.Windows.FrameworkElement fe || fe.Tag is not Product p)
+                return;
+
+            var win = new ProductEditWindow(p) { Owner = this };
+            if (win.ShowDialog() == true)
+                ReloadProducts();
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;  
+
+            if (sender is not System.Windows.FrameworkElement fe || fe.Tag is not Product p)
+                return;
+
+            bool inOrder = _db.OrderArticles.Any(oa => oa.ProductId == p.Id);
+            if (inOrder)
+            {
+                MessageBox.Show("Нельзя удалить товар: он присутствует в заказе.");
+                return;
+            }
+
+            if (MessageBox.Show($"Удалить товар «{p.Name?.Name}»?", "Подтверждение",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
+                return;
+
+            var toDelete = _db.Products.FirstOrDefault(x => x.Id == p.Id);
+            if (toDelete != null)
+            {
+                _db.Products.Remove(toDelete);
+                _db.SaveChanges();
+            }
+            ReloadProducts();
+        }
+
         private void Exit_Click(object sender, RoutedEventArgs e) => Close();
     }
 }
